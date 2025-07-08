@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/python-311
+FROM registry.access.redhat.com/ubi9/python-311:9.6
 WORKDIR /app/
 USER root
 RUN dnf install -y sshpass sqlite
