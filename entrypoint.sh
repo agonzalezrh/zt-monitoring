@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS network_usage (
 EOF
 fi
 fastapi dev --host 0.0.0.0 --port 9999 api.py  &
-while [ true ]; do
-  ansible-playbook main.yml
-  sleep 5
-done
+
+# Run every 5 seconds, timeout after 10 seconds.
+watch -n 5 'timeout 4 ansible-playbook main.yml || echo "Playbook timed out or failed"'
