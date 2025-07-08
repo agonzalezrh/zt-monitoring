@@ -1,0 +1,5 @@
+FROM lscr.io/linuxserver/openssh-server:latest
+
+RUN apk update && \
+    apk add python3 && \
+    apk cache clean

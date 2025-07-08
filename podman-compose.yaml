@@ -1,0 +1,30 @@
+version: "3.0"
+
+name: zerotouch
+
+services:
+  monitoring:
+    build: .
+    volumes:
+      - ./:/app:z
+    environment:
+      - BASTION_HOST=host
+      - BASTION_PORT=2222
+      - BASTION_USER=lab-user
+      - BASTION_PASSWORD=password
+      - OTHER_HOSTS=host
+    ports:
+      - "9999:9999"
+
+  host:
+    build: ./.compose/openssh
+    container_name: host
+    hostname: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Australia/Sydney
+      - PASSWORD_ACCESS=true
+      - USER_NAME=lab-user
+      - USER_PASSWORD=password
+    restart: unless-stopped
